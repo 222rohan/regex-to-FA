@@ -167,8 +167,12 @@ ENFA ENFA::regex_to_nfa(string regex){
     for(int i=0;i<regex.length(); i++){
         
         if(regex[i] == '('){
-            stateStack.push(currState);
-            subStartState = currState;
+            ++statecount;
+            M.add_state(statecount);
+            M.add_transition(currState, '-', statecount);
+            stateStack.push(statecount);
+            subStartState = statecount;
+            currState = statecount;
         }
         if(isChar(regex[i])){
             M.add_alphabet(regex[i]);
@@ -184,9 +188,7 @@ ENFA ENFA::regex_to_nfa(string regex){
                 M.add_transition(currState, '-', subFinalState);
                 //M.add_transition(subFinalState, '-', currState);
                 }
-                if(stateStack.size() == 2){
-                    M.add_final_state(currState);
-                }
+                
             
             subFinalState = currState;
             currState = subStartState;
@@ -205,12 +207,14 @@ ENFA ENFA::regex_to_nfa(string regex){
             subStartState = stateStack.top();
         }
         if(regex[i] == '*'){
-            M.add_transition(currState,'-',subStartState);
-            M.add_transition(subStartState, '-', currState);
+            
+            M.add_transition(prevState,'-',currState);
+            M.add_transition(currState, '-', prevState);
+            
             currState = prevState;
         }
     }
-    //M.add_final_state(subFinalState);
+    M.add_final_state(subFinalState);
     return M;
 
 }
