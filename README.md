@@ -29,3 +29,7 @@ Linearly scans the given regex in string format and converts it into the given e
     ```bash
     ./main
     ```
+## TODO
+- NFA-DFA conversions
+- DFA minimizations
+- compiler(?)
