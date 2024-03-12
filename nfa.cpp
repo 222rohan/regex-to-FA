@@ -192,6 +192,11 @@ ENFA ENFA::regex_to_nfa(string regex){
             
             subFinalState = currState;
             currState = subStartState;
+
+            if(stateStack.size() == 2 ){
+                M.add_final_state(subFinalState);
+            }
+
         }
         if(regex[i] == ')'){    
             M.add_transition(currState, '-', subFinalState);
@@ -205,6 +210,9 @@ ENFA ENFA::regex_to_nfa(string regex){
             
             stateStack.pop();
             subStartState = stateStack.top();
+            if(stateStack.size() == 1){
+                M.add_final_state(subFinalState);
+            }
         }
         if(regex[i] == '*'){
             
@@ -214,7 +222,7 @@ ENFA ENFA::regex_to_nfa(string regex){
             currState = prevState;
         }
     }
-    M.add_final_state(subFinalState);
+    //M.add_final_state(subFinalState);
     return M;
 
 }
