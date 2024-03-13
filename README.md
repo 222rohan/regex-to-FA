@@ -1,7 +1,7 @@
 # Regex to Finite Automata (FA)
 
--This project is a C++ implementation of a Non-deterministic Finite Automata (NFA & e-NFA) and Deterministic Finite Automata (DFA). It converts regular expressions to finite automata.
--Converts Regex to FA in a single scan (without converting expression to postfix).
+- This project is a C++ implementation of a Non-deterministic Finite Automata (NFA & e-NFA) and Deterministic Finite Automata (DFA). It converts regular expressions to finite automata.
+- Converts Regex to FA in a single scan (without converting expression to postfix).
 
 ## Files
 
